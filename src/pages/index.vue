@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import IdCard from '@/components/IdCard.vue'
-import customCheck from '@images/svg/Check.svg'
-import customLaptop from '@images/svg/laptop.svg'
-import customLightbulb from '@images/svg/lightbulb.svg'
-
-import AcademyCardTopCourses from '@/components/AcademyCardTopCourses.vue'
-import UserBioPanel from '@/components/UserBioPanel.vue'
-import data from '@/views/data/tableData'
+import data from '@/views/data/tableData';
+import customCheck from '@images/svg/Check.svg';
+import customLaptop from '@images/svg/laptop.svg';
+import customLightbulb from '@images/svg/lightbulb.svg';
 
 const headers = [
   { title: 'NAME', key: 'fullName' },
@@ -156,7 +152,14 @@ const userData = {
         md="4"
         sm="6"
       >
-        <UserBioPanel :user-data="userData" />
+        <AcademyUpcomingWebinar />
+      </VCol>
+
+      <VCol
+        cols="12"
+        md="4"
+        sm="6">
+        <AcademyCardPopularInstructors />
       </VCol>
     </VRow>
   </div>

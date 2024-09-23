@@ -7,7 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AcademyCardPopularInstructors: typeof import('./src/components/AcademyCardPopularInstructors.vue')['default']
     AcademyCardTopCourses: typeof import('./src/components/AcademyCardTopCourses.vue')['default']
+    AcademyUpcomingWebinar: typeof import('./src/components/AcademyUpcomingWebinar.vue')['default']
     AddAuthenticatorAppDialog: typeof import('./src/components/dialogs/AddAuthenticatorAppDialog.vue')['default']
     AddEditAddressDialog: typeof import('./src/components/dialogs/AddEditAddressDialog.vue')['default']
     AddEditPermissionDialog: typeof import('./src/components/dialogs/AddEditPermissionDialog.vue')['default']
