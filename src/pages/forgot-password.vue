@@ -1,5 +1,4 @@
-<script setup >
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue';
+<script setup lang="ts">
 import authV1BottomShape from '@images/svg/auth-v1-bottom-shape.svg?raw';
 import authV1TopShape from '@images/svg/auth-v1-top-shape.svg?raw';
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer';
@@ -14,11 +13,7 @@ definePage({
 
 const form = ref({
   email: '',
-  password: '',
-  remember: false,
 })
-
-const isPasswordVisible = ref(false)
 </script>
 
 <template>
@@ -36,7 +31,7 @@ const isPasswordVisible = ref(false)
         class="text-primary auth-v1-bottom-shape d-none d-sm-block"
       />
 
-      <!-- 👉 Auth Card -->
+      <!-- 👉 Auth card -->
       <VCard
         class="auth-card"
         max-width="460"
@@ -57,10 +52,10 @@ const isPasswordVisible = ref(false)
 
         <VCardText>
           <h4 class="text-h4 mb-1">
-            Welcome to <span class="text-capitalize">{{ themeConfig.app.title }}</span>! 👋🏻
+            Forgot Password? 🔒
           </h4>
           <p class="mb-0">
-            Please sign-in to your account and start the adventure
+            Enter your email and we'll send you instructions to reset your password
           </p>
         </VCardText>
 
@@ -72,78 +67,35 @@ const isPasswordVisible = ref(false)
                 <AppTextField
                   v-model="form.email"
                   autofocus
-                  label="Email or Username"
+                  label="Email"
                   type="email"
                   placeholder="johndoe@email.com"
                 />
               </VCol>
 
-              <!-- password -->
+              <!-- reset password -->
               <VCol cols="12">
-                <AppTextField
-                  v-model="form.password"
-                  label="Password"
-                  placeholder="············"
-                  :type="isPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
-                  @click:append-inner="isPasswordVisible = !isPasswordVisible"
-                />
-
-                <!-- remember me checkbox -->
-                <div class="d-flex align-center justify-space-between flex-wrap my-6">
-                  <VCheckbox
-                    v-model="form.remember"
-                    label="Remember me"
-                  />
-
-                  <RouterLink
-                    class="text-primary"
-                    :to="{ name: 'forgot-password' }"
-                  >
-                    Forgot Password?
-                  </RouterLink>
-                </div>
-
-                <!-- login button -->
                 <VBtn
                   block
                   type="submit"
                 >
-                  Login
+                  Send Reset Link
                 </VBtn>
               </VCol>
 
-              <!-- create account -->
-              <VCol
-                cols="12"
-                class="text-body-1 text-center"
-              >
-                <span class="d-inline-block">
-                  New on our platform?
-                </span>
+              <!-- back to login -->
+              <VCol cols="12">
                 <RouterLink
-                  class="text-primary ms-1 d-inline-block text-body-1"
-                  :to="{ name: 'sign-up' }"
+                  class="d-flex align-center justify-center"
+                  :to="{ name: 'login' }"
                 >
-                  Create an account
+                  <VIcon
+                    icon="tabler-chevron-left"
+                    size="20"
+                    class="me-1 flip-in-rtl"
+                  />
+                  <span>Back to login</span>
                 </RouterLink>
-              </VCol>
-
-              <VCol
-                cols="12"
-                class="d-flex align-center"
-              >
-                <VDivider />
-                <span class="mx-4 text-high-emphasis">or</span>
-                <VDivider />
-              </VCol>
-
-              <!-- auth providers -->
-              <VCol
-                cols="12"
-                class="text-center"
-              >
-                <AuthProvider />
               </VCol>
             </VRow>
           </VForm>

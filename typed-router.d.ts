@@ -20,7 +20,9 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     'root': RouteRecordInfo<'root', '/', Record<never, never>, Record<never, never>>,
     '$error': RouteRecordInfo<'$error', '/:error(.*)', { error: ParamValue<true> }, { error: ParamValue<false> }>,
+    'forgot-password': RouteRecordInfo<'forgot-password', '/forgot-password', Record<never, never>, Record<never, never>>,
     'login': RouteRecordInfo<'login', '/login', Record<never, never>, Record<never, never>>,
     'posts': RouteRecordInfo<'posts', '/posts', Record<never, never>, Record<never, never>>,
+    'sign-up': RouteRecordInfo<'sign-up', '/sign-up', Record<never, never>, Record<never, never>>,
   }
 }

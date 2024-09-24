@@ -13,9 +13,10 @@ definePage({
 })
 
 const form = ref({
+  username: '',
   email: '',
   password: '',
-  remember: false,
+  privacyPolicies: false,
 })
 
 const isPasswordVisible = ref(false)
@@ -36,7 +37,7 @@ const isPasswordVisible = ref(false)
         class="text-primary auth-v1-bottom-shape d-none d-sm-block"
       />
 
-      <!-- 👉 Auth Card -->
+      <!-- 👉 Auth card -->
       <VCard
         class="auth-card"
         max-width="460"
@@ -57,22 +58,30 @@ const isPasswordVisible = ref(false)
 
         <VCardText>
           <h4 class="text-h4 mb-1">
-            Welcome to <span class="text-capitalize">{{ themeConfig.app.title }}</span>! 👋🏻
+            Adventure starts here 🚀
           </h4>
           <p class="mb-0">
-            Please sign-in to your account and start the adventure
+            Make your app management easy and fun!
           </p>
         </VCardText>
 
         <VCardText>
           <VForm @submit.prevent="() => {}">
             <VRow>
+              <!-- Username -->
+              <VCol cols="12">
+                <AppTextField
+                  v-model="form.username"
+                  autofocus
+                  label="Username"
+                  placeholder="Johndoe"
+                />
+              </VCol>
               <!-- email -->
               <VCol cols="12">
                 <AppTextField
                   v-model="form.email"
-                  autofocus
-                  label="Email or Username"
+                  label="Email"
                   type="email"
                   placeholder="johndoe@email.com"
                 />
@@ -89,43 +98,43 @@ const isPasswordVisible = ref(false)
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
 
-                <!-- remember me checkbox -->
-                <div class="d-flex align-center justify-space-between flex-wrap my-6">
+                <div class="d-flex align-center my-6">
                   <VCheckbox
-                    v-model="form.remember"
-                    label="Remember me"
+                    id="privacy-policy"
+                    v-model="form.privacyPolicies"
+                    inline
                   />
-
-                  <RouterLink
-                    class="text-primary"
-                    :to="{ name: 'forgot-password' }"
+                  <VLabel
+                    for="privacy-policy"
+                    style="opacity: 1;"
                   >
-                    Forgot Password?
-                  </RouterLink>
+                    <span class="me-1 text-high-emphasis">I agree to</span>
+                    <a
+                      href="javascript:void(0)"
+                      class="text-primary"
+                    >privacy policy & terms</a>
+                  </VLabel>
                 </div>
 
-                <!-- login button -->
                 <VBtn
                   block
                   type="submit"
                 >
-                  Login
+                  Sign up
                 </VBtn>
               </VCol>
 
-              <!-- create account -->
+              <!-- login instead -->
               <VCol
                 cols="12"
-                class="text-body-1 text-center"
+                class="text-center text-base"
               >
-                <span class="d-inline-block">
-                  New on our platform?
-                </span>
+                <span>Already have an account?</span>
                 <RouterLink
-                  class="text-primary ms-1 d-inline-block text-body-1"
-                  :to="{ name: 'sign-up' }"
+                  class="text-primary ms-1"
+                  :to="{ name: 'login' }"
                 >
-                  Create an account
+                  Sign in instead
                 </RouterLink>
               </VCol>
 
@@ -134,7 +143,7 @@ const isPasswordVisible = ref(false)
                 class="d-flex align-center"
               >
                 <VDivider />
-                <span class="mx-4 text-high-emphasis">or</span>
+                <span class="mx-4">or</span>
                 <VDivider />
               </VCol>
 
