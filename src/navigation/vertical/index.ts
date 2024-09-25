@@ -6,7 +6,7 @@ export default [
   },
   {
     title: 'Posts',
-    to: { name: 'posts' },
+    to: { name: 'posts-list' },
     icon: { icon: 'tabler-vocabulary' },
   },
 ]

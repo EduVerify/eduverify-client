@@ -39,7 +39,47 @@ const productList = [
     startDate: '2021-09-01',
     endDate: '2021-09-30',
     read: 'Read more',
-  }
+  },
+  {
+    id: 6,
+    logo: 'https://cdn.vuetifyjs.com/images/logos/logo.svg',
+    school: 'Vuetify',
+    startDate: '2021-09-01',
+    endDate: '2021-09-30',
+    read: 'Read more',
+  },
+  {
+    id: 7,
+    logo: 'https://cdn.vuetifyjs.com/images/logos/logo.svg',
+    school: 'Vuetify',
+    startDate: '2021-09-01',
+    endDate: '2021-09-30',
+    read: 'Read more',
+  },
+  {
+    id: 8,
+    logo: 'https://cdn.vuetifyjs.com/images/logos/logo.svg',
+    school: 'Vuetify',
+    startDate: '2021-09-01',
+    endDate: '2021-09-30',
+    read: 'Read more',
+  },
+  {
+    id: 9,
+    logo: 'https://cdn.vuetifyjs.com/images/logos/logo.svg',
+    school: 'Vuetify',
+    startDate: '2021-09-01',
+    endDate: '2021-09-30',
+    read: 'Read more',
+  },
+  {
+    id: 10,
+    logo: 'https://cdn.vuetifyjs.com/images/logos/logo.svg',
+    school: 'Vuetify',
+    startDate: '2021-09-01',
+    endDate: '2021-09-30',
+    read: 'Read more',
+  },
 ] 
 
 const search = ref('')
@@ -82,7 +122,7 @@ const headers = [
       :headers="headers"
       :items="productList || []"
       :search="search"
-      :items-per-page="5"
+      :items-per-page="10"
       class="text-no-wrap"
     >
       <!-- product -->
