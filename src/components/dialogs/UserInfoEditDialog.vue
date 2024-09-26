@@ -1,20 +1,18 @@
 <script setup lang="ts">
+import { defineEmits, defineProps } from 'vue';
+
 interface UserData {
-  id: number | null
-  fullName: string
-  company: string
-  username: string
-  role: string
-  country: string
-  contact: string | undefined
-  email: string | undefined
-  currentPlan: string
-  status: string | undefined
-  avatar: string
-  taskDone: number | null
-  projectDone: number | null
-  taxId: string
-  language: string
+  id: number
+    fullName: string
+    firstName: string
+    lastName: string
+    username: string
+    role: string
+    country: string
+    contact: string
+    email: string
+    avatar: string
+    taskDone: number
 }
 
 interface Props {
@@ -31,19 +29,15 @@ const props = withDefaults(defineProps<Props>(), {
   userData: () => ({
     id: 0,
     fullName: '',
-    company: '',
-    role: '',
+    firstName: '',
+    lastName: '',
     username: '',
+    role: '',
     country: '',
     contact: '',
     email: '',
-    currentPlan: '',
-    status: '',
     avatar: '',
-    taskDone: null,
-    projectDone: null,
-    taxId: '',
-    language: '',
+    taskDone: 0,
   }),
 })
 
@@ -142,30 +136,6 @@ const dialogModelValueUpdate = (val: boolean) => {
               />
             </VCol>
 
-            <!-- 👉 Status -->
-            <VCol
-              cols="12"
-              md="6"
-            >
-              <AppSelect
-                v-model="userData.status"
-                label="Status"
-                placeholder="Active"
-                :items="['Active', 'Inactive', 'Pending']"
-              />
-            </VCol>
-
-            <!-- 👉 Tax Id -->
-            <VCol
-              cols="12"
-              md="6"
-            >
-              <AppTextField
-                v-model="userData.taxId"
-                label="Tax ID"
-                placeholder="123456789"
-              />
-            </VCol>
 
             <!-- 👉 Contact -->
             <VCol
@@ -179,21 +149,6 @@ const dialogModelValueUpdate = (val: boolean) => {
               />
             </VCol>
 
-            <!-- 👉 Language -->
-            <VCol
-              cols="12"
-              md="6"
-            >
-              <AppSelect
-                v-model="userData.language"
-                closable-chips
-                chips
-                multiple
-                label="Language"
-                placeholder="English"
-                :items="['English', 'Spanish', 'French']"
-              />
-            </VCol>
 
             <!-- 👉 Country -->
             <VCol

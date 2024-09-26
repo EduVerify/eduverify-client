@@ -9,4 +9,10 @@ export default [
     to: { name: 'posts-list' },
     icon: { icon: 'tabler-vocabulary' },
   },
+
+  {
+    title: 'Account',
+    to: { name: 'users-me' },
+    icon: { icon: 'tabler-user' },
+  },
 ]
