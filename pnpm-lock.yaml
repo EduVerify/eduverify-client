@@ -110,6 +110,9 @@ importers:
       vue-i18n:
         specifier: 9.13.1
         version: 9.13.1(vue@3.4.35(typescript@5.5.4))
+      vue-phone-number-input:
+        specifier: ^1.12.13
+        version: 1.12.13(stylelint@16.8.0(typescript@5.5.4))
       vue-prism-component:
         specifier: 2.0.0
         version: 2.0.0
@@ -1528,6 +1531,9 @@ packages:
   '@vue/compiler-dom@3.4.35':
     resolution: {integrity: sha512-pWIZRL76/oE/VMhdv/ovZfmuooEni6JPG1BFe7oLk5DZRo/ImydXijoZl/4kh2406boRQ7lxTYzbZEEXEhj9NQ==}
 
+  '@vue/compiler-sfc@2.7.16':
+    resolution: {integrity: sha512-KWhJ9k5nXuNtygPU7+t1rX6baZeqOYLEforUPjgNDBnLicfHCoi48H87Q8XyLZOrNNsmhuwKqtpDQWjEFe6Ekg==}
+
   '@vue/compiler-sfc@3.4.34':
     resolution: {integrity: sha512-x6lm0UrM03jjDXTPZgD9Ad8bIVD1ifWNit2EaWQIZB5CULr46+FbLQ5RpK7AXtDHGjx9rmvC7QRCTjsiGkAwRw==}
 
@@ -2907,6 +2913,9 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
+  libphonenumber-js@1.11.9:
+    resolution: {integrity: sha512-Zs5wf5HaWzW2/inlupe2tstl0I/Tbqo7lH20ZLr6Is58u7Dz2n+gRFGNlj9/gWxFvNfp9+YyDsiegjNhdixB9A==}
+
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
@@ -3347,6 +3356,10 @@ packages:
     resolution: {integrity: sha512-b4dlw/9V8A71rLIDsSwVmak9z2DuBUB7CA1/wSdelNEzqsjoSPeADTWNO09lpH49Diy3/JIZ2bSPB1dI3LJCHg==}
     engines: {node: '>=4'}
 
+  postcss-sorting@5.0.1:
+    resolution: {integrity: sha512-Y9fUFkIhfrm6i0Ta3n+89j56EFqaNRdUKqXyRp6kvTcSXnmgEjaVowCXH+JBe9+YKWqd4nc28r2sgwnzJalccA==}
+    engines: {node: '>=8.7.0'}
+
   postcss-sorting@8.0.2:
     resolution: {integrity: sha512-M9dkSrmU00t/jK7rF6BZSZauA5MAaBW4i5EnJXspMwt4iqTh/L9j6fgMnbElEOfyRyfLfVbIHj/R52zHzAPe1Q==}
     peerDependencies:
@@ -3368,6 +3381,11 @@ packages:
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+
+  prettier@2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
 
   prismjs@1.29.0:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
@@ -3580,6 +3598,9 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
+  scrollparent@2.1.0:
+    resolution: {integrity: sha512-bnnvJL28/Rtz/kz2+4wpBjHzWoEzXhVg/TE8BeVGJHUqE8THNIRnDxDWMktwM+qahvlRdvlLdsQfYe+cuqfZeA==}
+
   scslre@0.3.0:
     resolution: {integrity: sha512-3A6sD0WYP7+QrjbfNA2FN3FsOaGGFoekCVgTyypy53gPxhbkCIjtO6YWgdrfM+n/8sI8JeXZOIxsHjMTNxQ4nQ==}
     engines: {node: ^14.0.0 || >=16.0.0}
@@ -3734,6 +3755,9 @@ packages:
   strip-literal@2.1.0:
     resolution: {integrity: sha512-Op+UycaUt/8FbN/Z2TWPBLge3jWrP3xj10f3fnYxf052bKuS3EKs1ZQcVGjnEMdsNVAM+plXRdmjrZ/KgG3Skw==}
 
+  style-helpers@1.0.2:
+    resolution: {integrity: sha512-1wDr4EsNepPWPWsbr0m7H+4saaJK7+/H+VQqoLTmoaS3A0zXFzoCk+16RLXevnzfunVByFCu7tmyR2tXwzmBGw==}
+
   style-search@0.1.0:
     resolution: {integrity: sha512-Dj1Okke1C3uKKwQcetra4jSuk0DqbzbYtXipzFlFMZtowbF1x7BKJwB9AayVMyFARvU8EDrZdcax4At/452cAg==}
 
@@ -3774,6 +3798,11 @@ packages:
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: ^16.1.0
+
+  stylelint-order@4.1.0:
+    resolution: {integrity: sha512-sVTikaDvMqg2aJjh4r48jsdfmqLT+nqB1MOsaBnvM3OwLx4S+WXcsxsgk5w18h/OZoxZCxuyXMh61iBHcj9Qiw==}
+    peerDependencies:
+      stylelint: ^10.0.1 || ^11.0.0 || ^12.0.0 || ^13.0.0
 
   stylelint-order@6.0.4:
     resolution: {integrity: sha512-0UuKo4+s1hgQ/uAxlYU4h0o0HS4NiQDud0NAUNI0aa8FJdmYHA5ZZTFHiV5FpmE3071e9pZx5j0QpVJW5zOCUA==}
@@ -4208,8 +4237,19 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
+  vue-observe-visibility@0.4.6:
+    resolution: {integrity: sha512-xo0CEVdkjSjhJoDdLSvoZoQrw/H2BlzB5jrCBKGZNXN2zdZgMuZ9BKrxXDjNP2AxlcCoKc8OahI3F3r3JGLv2Q==}
+
+  vue-phone-number-input@1.12.13:
+    resolution: {integrity: sha512-ZEHNQvLnxnwZOO4bgf6RRPduV91Ph4HrkqS7QeWqiIanGycz0h7yUgMS5z1Qf6gU1l3Whk1EQD+zn+eQcnolyg==}
+
   vue-prism-component@2.0.0:
     resolution: {integrity: sha512-1ofrL+GCZOv4HqtX5W3EgkhSAgadSeuD8FDTXbwhLy8kS+28RCR8t2S5VTeM9U/peAaXLBpSgRt3J25ao8KTeg==}
+
+  vue-resize@0.4.5:
+    resolution: {integrity: sha512-bhP7MlgJQ8TIkZJXAfDf78uJO+mEI3CaLABLjv0WNzr4CcGRGPIAItyWYnP6LsPA4Oq0WE+suidNs6dgpO4RHg==}
+    peerDependencies:
+      vue: ^2.3.0
 
   vue-router@4.4.0:
     resolution: {integrity: sha512-HB+t2p611aIZraV2aPSRNXf0Z/oLZFrlygJm+sZbdJaW6lcFqEDQwnzUBXn+DApw+/QzDU/I9TeWx9izEjTmsA==}
@@ -4227,6 +4267,11 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
+  vue-virtual-scroller@1.1.2:
+    resolution: {integrity: sha512-SkUyc7QHCJFB5h1Fya7LxVizlVzOZZuFVipBGHYoTK8dwLs08bIz/tclvRApYhksaJIm/nn51inzO2UjpGJPMQ==}
+    peerDependencies:
+      vue: ^2.6.11
+
   vue3-apexcharts@1.5.3:
     resolution: {integrity: sha512-yaHTPoj0iVKAtEVg8wEwIwwvf0VG+lPYNufCf3txRzYQOqdKPoZaZ9P3Dj3X+2A1XY9O1kcTk9HVqvLo+rppvQ==}
     peerDependencies:
@@ -4237,6 +4282,10 @@ packages:
     resolution: {integrity: sha512-nSWVcRyViCgt0Pe3RhU3w/BllLcFSrEzYOGlRBjSyhVmiZlERHHziffW+9P8L0IMEWouC5t+uYrgNJGSAElqMA==}
     peerDependencies:
       vue: ^3.0.0
+
+  vue@2.7.16:
+    resolution: {integrity: sha512-4gCtFXaAA3zYZdTp5s4Hl2sozuySsgz4jy1EnpBHNfpMa9dK1ZCG7viqBPCwXtmgc8nHqUsAu3G4gtmXkkY3Sw==}
+    deprecated: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
 
   vue@3.4.35:
     resolution: {integrity: sha512-+fl/GLmI4GPileHftVlCdB7fUL4aziPcqTudpTGXCT8s+iZWuOCeNEB5haX6Uz2IpRrbEXOgIFbe+XciCuGbNQ==}
@@ -5758,6 +5807,14 @@ snapshots:
     dependencies:
       '@vue/compiler-core': 3.4.35
       '@vue/shared': 3.4.35
+
+  '@vue/compiler-sfc@2.7.16':
+    dependencies:
+      '@babel/parser': 7.25.0
+      postcss: 8.4.40
+      source-map: 0.6.1
+    optionalDependencies:
+      prettier: 2.8.8
 
   '@vue/compiler-sfc@3.4.34':
     dependencies:
@@ -7416,6 +7473,8 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
+  libphonenumber-js@1.11.9: {}
+
   lines-and-columns@1.2.4: {}
 
   linkify-it@5.0.0:
@@ -7888,6 +7947,11 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
+  postcss-sorting@5.0.1:
+    dependencies:
+      lodash: 4.17.21
+      postcss: 8.4.40
+
   postcss-sorting@8.0.2(postcss@8.4.40):
     dependencies:
       postcss: 8.4.40
@@ -7905,6 +7969,9 @@ snapshots:
   preact@10.12.1: {}
 
   prelude-ls@1.2.1: {}
+
+  prettier@2.8.8:
+    optional: true
 
   prismjs@1.29.0: {}
 
@@ -8165,6 +8232,8 @@ snapshots:
       immutable: 4.3.7
       source-map-js: 1.2.0
 
+  scrollparent@2.1.0: {}
+
   scslre@0.3.0:
     dependencies:
       '@eslint-community/regexpp': 4.11.0
@@ -8245,8 +8314,7 @@ snapshots:
 
   source-map-js@1.2.0: {}
 
-  source-map@0.6.1:
-    optional: true
+  source-map@0.6.1: {}
 
   spdx-correct@3.2.0:
     dependencies:
@@ -8322,6 +8390,12 @@ snapshots:
     dependencies:
       js-tokens: 9.0.0
 
+  style-helpers@1.0.2(stylelint@16.8.0(typescript@5.5.4)):
+    dependencies:
+      stylelint-order: 4.1.0(stylelint@16.8.0(typescript@5.5.4))
+    transitivePeerDependencies:
+      - stylelint
+
   style-search@0.1.0: {}
 
   stylelint-config-idiomatic-order@10.0.0(stylelint@16.8.0(typescript@5.5.4)):
@@ -8354,6 +8428,13 @@ snapshots:
     dependencies:
       stylelint: 16.8.0(typescript@5.5.4)
       stylelint-config-recommended: 14.0.1(stylelint@16.8.0(typescript@5.5.4))
+
+  stylelint-order@4.1.0(stylelint@16.8.0(typescript@5.5.4)):
+    dependencies:
+      lodash: 4.17.21
+      postcss: 8.4.40
+      postcss-sorting: 5.0.1
+      stylelint: 16.8.0(typescript@5.5.4)
 
   stylelint-order@6.0.4(stylelint@16.8.0(typescript@5.5.4)):
     dependencies:
@@ -8910,7 +8991,22 @@ snapshots:
       '@vue/devtools-api': 6.6.3
       vue: 3.4.35(typescript@5.5.4)
 
+  vue-observe-visibility@0.4.6: {}
+
+  vue-phone-number-input@1.12.13(stylelint@16.8.0(typescript@5.5.4)):
+    dependencies:
+      libphonenumber-js: 1.11.9
+      style-helpers: 1.0.2(stylelint@16.8.0(typescript@5.5.4))
+      vue: 2.7.16
+      vue-virtual-scroller: 1.1.2(vue@2.7.16)
+    transitivePeerDependencies:
+      - stylelint
+
   vue-prism-component@2.0.0: {}
+
+  vue-resize@0.4.5(vue@2.7.16):
+    dependencies:
+      vue: 2.7.16
 
   vue-router@4.4.0(vue@3.4.35(typescript@5.5.4)):
     dependencies:
@@ -8929,6 +9025,13 @@ snapshots:
       semver: 7.6.3
       typescript: 5.5.4
 
+  vue-virtual-scroller@1.1.2(vue@2.7.16):
+    dependencies:
+      scrollparent: 2.1.0
+      vue: 2.7.16
+      vue-observe-visibility: 0.4.6
+      vue-resize: 0.4.5(vue@2.7.16)
+
   vue3-apexcharts@1.5.3(apexcharts@3.51.0)(vue@3.4.35(typescript@5.5.4)):
     dependencies:
       apexcharts: 3.51.0
@@ -8938,6 +9041,11 @@ snapshots:
     dependencies:
       perfect-scrollbar: 1.5.5
       vue: 3.4.35(typescript@5.5.4)
+
+  vue@2.7.16:
+    dependencies:
+      '@vue/compiler-sfc': 2.7.16
+      csstype: 3.1.3
 
   vue@3.4.35(typescript@5.5.4):
     dependencies:

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue';
 
 interface UserData {
   id: number
@@ -44,7 +43,6 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<Emit>()
 
 const userData = ref<UserData>(structuredClone(toRaw(props.userData)))
-const isUseAsBillingAddress = ref(false)
 
 watch(() => props, () => {
   userData.value = structuredClone(toRaw(props.userData))
@@ -145,7 +143,7 @@ const dialogModelValueUpdate = (val: boolean) => {
               <AppTextField
                 v-model="userData.contact"
                 label="Phone Number"
-                placeholder="+1 9876543210"
+                placeholder="+21266666666"
               />
             </VCol>
 
@@ -163,14 +161,6 @@ const dialogModelValueUpdate = (val: boolean) => {
               />
             </VCol>
 
-            <!-- 👉 Switch -->
-            <VCol cols="12">
-              <VSwitch
-                v-model="isUseAsBillingAddress"
-                density="compact"
-                label="Use as a billing address?"
-              />
-            </VCol>
 
             <!-- 👉 Submit and Cancel -->
             <VCol

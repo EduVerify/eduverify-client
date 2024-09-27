@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DemoFormWizardNumberedModernVertical from '@/components/DemoFormWizardNumberedModernVertical.vue';
+
 import logo from '@images/pages/logo-uiz.png';
 </script>
 <template>

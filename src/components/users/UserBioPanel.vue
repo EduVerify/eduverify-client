@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
 
 interface Props {
   userData: {
@@ -19,11 +18,6 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const standardPlan = {
-  plan: 'Standard',
-  price: 99,
-  benefits: ['10 Users', 'Up to 10GB storage', 'Basic Support'],
-}
 
 const isUserInfoEditDialogVisible = ref(false)
 const isUpgradePlanDialogVisible = ref(false)
@@ -78,7 +72,7 @@ const resolveUserRoleVariant = (role: string) => {
           <!-- 👉 Role chip -->
           <VChip
             label
-            :color="resolveUserRoleVariant(props.userData.role).color"
+            :color="(resolveUserRoleVariant(props.userData.role)).color"
             size="small"
             class="text-capitalize mt-4"
           >
@@ -104,27 +98,11 @@ const resolveUserRoleVariant = (role: string) => {
               </VAvatar>
               <div>
                 <h5 class="text-h5">
-                  {{ `${(props.userData.taskDone / 1000).toFixed(2)}k` }}
+                  {{ `${(props.userData.taskDone)}` }}
                 </h5>
 
                 <span class="text-sm">Task Done</span>
               </div>
-            </div>
-
-            <!-- 👉 Done Project -->
-            <div class="d-flex align-center me-4">
-              <VAvatar
-                :size="38"
-                rounded
-                color="primary"
-                variant="tonal"
-                class="me-4"
-              >
-                <VIcon
-                  icon="tabler-briefcase"
-                  size="24"
-                />
-              </VAvatar>
             </div>
           </div>
 
