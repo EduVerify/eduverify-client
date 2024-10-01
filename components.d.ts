@@ -48,6 +48,8 @@ declare module 'vue' {
     DropZone: typeof import('./src/@core/components/DropZone.vue')['default']
     EnableOneTimePasswordDialog: typeof import('./src/components/dialogs/EnableOneTimePasswordDialog.vue')['default']
     ErrorHeader: typeof import('./src/components/ErrorHeader.vue')['default']
+    GoogleLoginButton: typeof import('./src/components/oauth/GoogleLoginButton.vue')['default']
+    GoogleRedirect: typeof import('./src/components/oauth/GoogleRedirect.vue')['default']
     I18n: typeof import('./src/@core/components/I18n.vue')['default']
     IdCard: typeof import('./src/components/IdCard.vue')['default']
     MastersTable: typeof import('./src/components/MastersTable.vue')['default']

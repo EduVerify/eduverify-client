@@ -1,5 +1,4 @@
 <script setup >
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue';
 import authV1BottomShape from '@images/svg/auth-v1-bottom-shape.svg?raw';
 import authV1TopShape from '@images/svg/auth-v1-top-shape.svg?raw';
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer';
@@ -143,7 +142,7 @@ const isPasswordVisible = ref(false)
                 cols="12"
                 class="text-center"
               >
-                <AuthProvider />
+                <GoogleLoginButton />
               </VCol>
             </VRow>
           </VForm>
