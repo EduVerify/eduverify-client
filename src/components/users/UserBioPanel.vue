@@ -1,23 +1,17 @@
 <script setup lang="ts">
-
+interface UserData {
+  email: string
+  first_name: string
+  last_name: string
+  phone: string
+  picture: string
+  role: string
+}
 interface Props {
-  userData: {
-    id: number
-    fullName: string
-    firstName: string
-    lastName: string
-    username: string
-    role: string
-    country: string
-    contact: string
-    email: string
-    avatar: string
-    taskDone: number
-  }
+  userData: UserData
 }
 
 const props = defineProps<Props>()
-
 
 const isUserInfoEditDialogVisible = ref(false)
 const isUpgradePlanDialogVisible = ref(false)
@@ -49,24 +43,24 @@ const resolveUserRoleVariant = (role: string) => {
           <VAvatar
             rounded
             :size="100"
-            :color="!props.userData.avatar ? 'primary' : undefined"
-            :variant="!props.userData.avatar ? 'tonal' : undefined"
+            :color="!props.userData.picture ? 'primary' : undefined"
+            :variant="!props.userData.picture ? 'tonal' : undefined"
           >
             <VImg
-              v-if="props.userData.avatar"
-              :src="props.userData.avatar"
+              v-if="props.userData.picture"
+              :src="props.userData.picture"
             />
             <span
               v-else
               class="text-5xl font-weight-medium"
             >
-              {{ avatarText(props.userData.fullName) }}
+              {{ avatarText(`${props.userData.first_name} ${props.userData.last_name}`) }}
             </span>
           </VAvatar>
 
           <!-- 👉 User fullName -->
           <h5 class="text-h5 mt-4">
-            {{ props.userData.fullName }}
+            {{ `${props.userData.first_name} ${props.userData.last_name}` }}
           </h5>
 
           <!-- 👉 Role chip -->
@@ -98,7 +92,7 @@ const resolveUserRoleVariant = (role: string) => {
               </VAvatar>
               <div>
                 <h5 class="text-h5">
-                  {{ `${(props.userData.taskDone)}` }}
+                  {{ `${(props.userData.taskDone ? props.userData.taskDone : 0)}` }}
                 </h5>
 
                 <span class="text-sm">Task Done</span>
@@ -120,7 +114,7 @@ const resolveUserRoleVariant = (role: string) => {
                 <h6 class="text-h6">
                   Username:
                   <div class="d-inline-block text-body-1">
-                    {{ props.userData.fullName }}
+                    {{ `${props.userData.first_name} ${props.userData.last_name}` }}
                   </div>
                 </h6>
               </VListItemTitle>
@@ -137,7 +131,6 @@ const resolveUserRoleVariant = (role: string) => {
               </VListItemTitle>
             </VListItem>
 
-
             <VListItem>
               <VListItemTitle>
                 <h6 class="text-h6">
@@ -149,18 +142,16 @@ const resolveUserRoleVariant = (role: string) => {
               </VListItemTitle>
             </VListItem>
 
-
             <VListItem>
               <VListItemTitle>
                 <h6 class="text-h6">
                   Contact:
                   <div class="d-inline-block text-body-1">
-                    {{ props.userData.contact }}
+                    {{ props.userData.phone }}
                   </div>
                 </h6>
               </VListItemTitle>
             </VListItem>
-
 
             <VListItem>
               <VListItemTitle>
@@ -194,7 +185,6 @@ const resolveUserRoleVariant = (role: string) => {
       </VCard>
     </VCol>
     <!-- !SECTION -->
-
   </VRow>
 
   <!-- 👉 Edit user info dialog -->

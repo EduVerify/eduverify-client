@@ -1,17 +1,11 @@
 <script setup lang="ts">
-
 interface UserData {
-  id: number
-    fullName: string
-    firstName: string
-    lastName: string
-    username: string
-    role: string
-    country: string
-    contact: string
-    email: string
-    avatar: string
-    taskDone: number
+  email: string
+  first_name: string
+  last_name: string
+  phone: string
+  picture: string
+  role: string
 }
 
 interface Props {
@@ -27,16 +21,13 @@ interface Emit {
 const props = withDefaults(defineProps<Props>(), {
   userData: () => ({
     id: 0,
-    fullName: '',
-    firstName: '',
-    lastName: '',
-    username: '',
-    role: '',
-    country: '',
-    contact: '',
     email: '',
-    avatar: '',
-    taskDone: 0,
+    first_name: '',
+    last_name: '',
+    phone: '',
+    picture: '',
+    role: '',
+
   }),
 })
 
@@ -95,7 +86,7 @@ const dialogModelValueUpdate = (val: boolean) => {
               md="6"
             >
               <AppTextField
-                v-model="userData.fullName.split(' ')[0]"
+                v-model="userData.first_name"
                 label="First Name"
                 placeholder="John"
               />
@@ -107,7 +98,7 @@ const dialogModelValueUpdate = (val: boolean) => {
               md="6"
             >
               <AppTextField
-                v-model="userData.fullName.split(' ')[1]"
+                v-model="userData.last_name"
                 label="Last Name"
                 placeholder="Doe"
               />
@@ -116,7 +107,7 @@ const dialogModelValueUpdate = (val: boolean) => {
             <!-- 👉 Username -->
             <VCol cols="12">
               <AppTextField
-                v-model="userData.username"
+                v-model="userData.first_name"
                 label="Username"
                 placeholder="john.doe.007"
               />
@@ -134,19 +125,17 @@ const dialogModelValueUpdate = (val: boolean) => {
               />
             </VCol>
 
-
             <!-- 👉 Contact -->
             <VCol
               cols="12"
               md="6"
             >
               <AppTextField
-                v-model="userData.contact"
+                v-model="userData.phone"
                 label="Phone Number"
                 placeholder="+21266666666"
               />
             </VCol>
-
 
             <!-- 👉 Country -->
             <VCol
@@ -160,7 +149,6 @@ const dialogModelValueUpdate = (val: boolean) => {
                 :items="['United States', 'United Kingdom', 'France']"
               />
             </VCol>
-
 
             <!-- 👉 Submit and Cancel -->
             <VCol

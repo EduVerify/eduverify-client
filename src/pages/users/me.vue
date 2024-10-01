@@ -1,8 +1,4 @@
 <script setup lang="ts">
-
-
-// const route = useRoute('apps-user-view-id')
-
 const userTab = ref(null)
 
 const tabs = [
@@ -10,21 +6,33 @@ const tabs = [
   { icon: 'tabler-lock', title: 'Security' },
 ]
 
-const { data: userData } = {
-  data: {
-    id: 1,
-    fullName: 'Zakarya Aanni',
-    firstName: 'Zakarya',
-    lastName: 'Aanni',
-    username: 'Zakarya.Aanni',
-    role: 'Student',
-    country: 'Morocco',
-    contact: '+212662271630',
-    email: 'zakaria.aanni@gmail.com',
-    avatar: 'https://lh3.googleusercontent.com/a/ACg8ocJCUqxas6b_jBreYhTDyiJ3R6vYMTe-WgzZ0UgQnU66E4MWBKPeRg=s96-c',
-    taskDone: 10,
-  },  
-}
+// const { data: userData } = {
+//   data: {
+//     id: 1,
+//     fullName: 'Zakarya Aanni',
+//     firstName: 'Zakarya',
+//     lastName: 'Aanni',
+//     username: 'Zakarya.Aanni',
+//     role: 'Student',
+//     country: 'Morocco',
+//     contact: '+212662271630',
+//     email: 'zakaria.aanni@gmail.com',
+//     avatar: 'https://lh3.googleusercontent.com/a/ACg8ocJCUqxas6b_jBreYhTDyiJ3R6vYMTe-WgzZ0UgQnU66E4MWBKPeRg=s96-c',
+//     taskDone: 10,
+//   },
+// }
+const userData = ref(null)
+
+onMounted(async () => {
+  try {
+    const { data } = await $api.get('/users/me')
+
+    userData.value = data
+  }
+  catch (error) {
+    console.error(error)
+  }
+})
 </script>
 
 <template>
