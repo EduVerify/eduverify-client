@@ -1,7 +1,31 @@
 <script setup lang="ts">
-import avatar1 from '@images/avatars/avatar-1.png'
-</script>
+import avatar1 from '@images/avatars/avatar-1.png';
+import { onMounted, ref } from 'vue';
 
+
+const handleLogout = () => {
+  localStorage.removeItem('accessToken');
+  
+  // Optionally, you can redirect the user to the login page
+  window.location.href = '/login';
+};
+
+const user = ref({
+  name: '',
+  role: '',
+  avatar: ''
+});
+
+onMounted(() => {
+  const storedUser = localStorage.getItem('user');
+  if (storedUser) {
+    const parsedUser = JSON.parse(storedUser);
+    user.value.name = parsedUser.firstName + ' ' + parsedUser.lastName;
+    user.value.role = parsedUser.role;
+    user.value.avatar = parsedUser.picture;
+  }
+});
+</script>
 <template>
   <VBadge
     dot
@@ -16,7 +40,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
       color="primary"
       variant="tonal"
     >
-      <VImg :src="avatar1" />
+      <VImg :src="user.avatar || avatar1" />
 
       <!-- SECTION Menu -->
       <VMenu
@@ -41,16 +65,16 @@ import avatar1 from '@images/avatars/avatar-1.png'
                     color="primary"
                     variant="tonal"
                   >
-                    <VImg :src="avatar1" />
+                    <VImg :src="user.avatar || avatar1" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{ user.name }}
             </VListItemTitle>
-            <VListItemSubtitle>Admin</VListItemSubtitle>
+            <VListItemSubtitle>{{ user.role }}</VListItemSubtitle>
           </VListItem>
 
           <VDivider class="my-2" />
@@ -111,7 +135,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
+          <VListItem @click="handleLogout" >
             <template #prepend>
               <VIcon
                 class="me-2"
