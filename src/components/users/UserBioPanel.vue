@@ -1,11 +1,13 @@
 <script setup lang="ts">
 interface UserData {
+  taskDone: any;
   email: string
   first_name: string
   last_name: string
   phone: string
   picture: string
   role: string
+  username:string
 }
 interface Props {
   userData: UserData
@@ -114,7 +116,7 @@ const resolveUserRoleVariant = (role: string) => {
                 <h6 class="text-h6">
                   Username:
                   <div class="d-inline-block text-body-1">
-                    {{ `${props.userData.first_name} ${props.userData.last_name}` }}
+                    {{ props.userData.username }}
                   </div>
                 </h6>
               </VListItemTitle>
@@ -148,17 +150,6 @@ const resolveUserRoleVariant = (role: string) => {
                   Contact:
                   <div class="d-inline-block text-body-1">
                     {{ props.userData.phone }}
-                  </div>
-                </h6>
-              </VListItemTitle>
-            </VListItem>
-
-            <VListItem>
-              <VListItemTitle>
-                <h6 class="text-h6">
-                  Country:
-                  <div class="d-inline-block text-body-1">
-                    {{ props.userData.country }}
                   </div>
                 </h6>
               </VListItemTitle>

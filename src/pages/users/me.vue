@@ -1,68 +1,27 @@
 <script setup lang="ts">
-const userTab = ref(null)
+import { useUserStore } from "@/@core/stores/userStore";
+const userTab = ref(null);
 
 const tabs = [
-  { icon: 'tabler-users', title: 'Account' },
-  { icon: 'tabler-lock', title: 'Security' },
-]
+  { icon: "tabler-users", title: "Account" },
+  { icon: "tabler-lock", title: "Security" },
+];
 
-// const { data: userData } = {
-//   data: {
-//     id: 1,
-//     fullName: 'Zakarya Aanni',
-//     firstName: 'Zakarya',
-//     lastName: 'Aanni',
-//     username: 'Zakarya.Aanni',
-//     role: 'Student',
-//     country: 'Morocco',
-//     contact: '+212662271630',
-//     email: 'zakaria.aanni@gmail.com',
-//     avatar: 'https://lh3.googleusercontent.com/a/ACg8ocJCUqxas6b_jBreYhTDyiJ3R6vYMTe-WgzZ0UgQnU66E4MWBKPeRg=s96-c',
-//     taskDone: 10,
-//   },
-// }
-const userData = ref(null)
-
-onMounted(async () => {
-  try {
-    const { data } = await $api.get('/users/me')
-
-    userData.value = data
-  }
-  catch (error) {
-    console.error(error)
-  }
-})
+const userData = ref(null);
+const { fetchUserData } = useUserStore();
+userData.value = await fetchUserData();
 </script>
 
 <template>
   <VRow v-if="userData">
-    <VCol
-      cols="12"
-      md="5"
-      lg="4"
-    >
+    <VCol cols="12" md="5" lg="4">
       <UserBioPanel :user-data="userData" />
     </VCol>
 
-    <VCol
-      cols="12"
-      md="7"
-      lg="8"
-    >
-      <VTabs
-        v-model="userTab"
-        class="v-tabs-pill"
-      >
-        <VTab
-          v-for="tab in tabs"
-          :key="tab.icon"
-        >
-          <VIcon
-            :size="18"
-            :icon="tab.icon"
-            class="me-1"
-          />
+    <VCol cols="12" md="7" lg="8">
+      <VTabs v-model="userTab" class="v-tabs-pill">
+        <VTab v-for="tab in tabs" :key="tab.icon">
+          <VIcon :size="18" :icon="tab.icon" class="me-1" />
           <span>{{ tab.title }}</span>
         </VTab>
       </VTabs>
@@ -83,11 +42,6 @@ onMounted(async () => {
     </VCol>
   </VRow>
   <div v-else>
-    <VAlert
-      type="error"
-      variant="tonal"
-    >
-      Invoice with ID not found!
-    </VAlert>
+    <VAlert type="error" variant="tonal"> Invoice with ID not found! </VAlert>
   </div>
 </template>
