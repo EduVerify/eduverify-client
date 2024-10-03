@@ -1,9 +1,10 @@
+import { UserData } from '@/@layouts/types';
 import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useUserStore = defineStore('userStore', () => {
-  const userData = ref();
+  const userData = ref<UserData>();
   const router = useRouter()
   const accessToken = useStorage('accessToken','')
 
@@ -13,30 +14,42 @@ export const useUserStore = defineStore('userStore', () => {
   }
   function removeAccessToken() {
     accessToken.value = '';
-    userData.value = '';
+    userData.value = {
+      taskDone: '',
+  email: '',
+  first_name: '',
+  last_name: '',
+  phone: '',
+  picture: '',
+  role: '',
+  username:'',
+    };
   }
-  function setUser(user: any) {
+  function setUser(user: UserData) {
     userData.value = user;
   }
   function socialLogin (queryParams: URLSearchParams) {
     const token = queryParams.get('token');
     const oauth = queryParams.get('oauth');
-    const firstName = queryParams.get('first_name');
-    const lastName = queryParams.get('last_name');
+    const first_name = queryParams.get('first_name');
+    const last_name = queryParams.get('last_name');
     const email = queryParams.get('email');
-    const picture = queryParams.get('picture');
+    const picture = queryParams?.get('picture');
     const role = queryParams.get('role');
     const username = queryParams.get('username');
+    const phone = queryParams.get('phone');
 
     if (token && oauth) {
       setAccessToken(token);
-      const user = {
-        firstName: firstName || '',
-        lastName: lastName || '',
+      const user: UserData = {
+        taskDone: '',
+        first_name: first_name || '',
+        last_name: last_name || '',
         email: email || '',
         picture: picture || '',
         role: role || '',
         username: username || '',
+        phone: phone || '',
       };
 
       setUser(user);
@@ -45,18 +58,20 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  const login = async (credentials: any) => {
+  async function login (credentials: any) {
     try {
       const { data } = await $api.post('/auth/login', credentials);
-      accessToken.value = data.accessToken;
-
-      return data;
+      setAccessToken(data.access_token);
+      setUser(data.user);
+      router.push({ name: 'root' });
     } catch (error) {
       console.error(error);
     }
   }
 
-  const fetchUserData = async () => {
+
+
+  async function fetchUserData () {
     try {
       const { data } = await $api.get('/users/me');
       userData.value = data;
@@ -66,7 +81,7 @@ export const useUserStore = defineStore('userStore', () => {
     }
   };
 
-  const updateUserData = async (updatedData: any) => {
+  async function updateUserData(updatedData: any)  {
     try {
       const { data } = await $api.put('/users/me', updatedData);
       userData.value = data;
@@ -82,7 +97,8 @@ export const useUserStore = defineStore('userStore', () => {
     removeAccessToken,
     updateUserData,
     socialLogin,
-    accessToken
+    accessToken,
+    login
   };
 }, {
   persist: true

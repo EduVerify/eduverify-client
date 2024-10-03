@@ -1,16 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from "@/@core/stores/userStore";
+import { UserData } from "@/@layouts/types";
 import { useToast } from "vue-toastification";
-
-interface UserData {
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  picture: string;
-  role: string;
-  username: string;
-}
 
 interface Props {
   userData?: UserData;

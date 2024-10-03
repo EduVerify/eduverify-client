@@ -10,12 +10,13 @@ const tabs = [
 const userData = ref(null);
 const { fetchUserData } = useUserStore();
 userData.value = await fetchUserData();
+console.log(userData.value);
 </script>
 
 <template>
   <VRow v-if="userData">
     <VCol cols="12" md="5" lg="4">
-      <UserBioPanel :user-data="userData" />
+      <UserBioPanel />
     </VCol>
 
     <VCol cols="12" md="7" lg="8">

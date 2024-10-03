@@ -1,23 +1,34 @@
-<script setup >
-import authV1BottomShape from '@images/svg/auth-v1-bottom-shape.svg?raw';
-import authV1TopShape from '@images/svg/auth-v1-top-shape.svg?raw';
-import { VNodeRenderer } from '@layouts/components/VNodeRenderer';
-import { themeConfig } from '@themeConfig';
+<script setup>
+import { useUserStore } from "@/@core/stores/userStore";
+import authV1BottomShape from "@images/svg/auth-v1-bottom-shape.svg?raw";
+import authV1TopShape from "@images/svg/auth-v1-top-shape.svg?raw";
+import { VNodeRenderer } from "@layouts/components/VNodeRenderer";
+import { themeConfig } from "@themeConfig";
 
 definePage({
   meta: {
-    layout: 'blank',
+    layout: "blank",
     public: true,
   },
-})
+});
 
 const form = ref({
-  email: '',
-  password: '',
+  email: "",
+  password: "",
   remember: false,
-})
+});
 
-const isPasswordVisible = ref(false)
+const isPasswordVisible = ref(false);
+
+const userStore = useUserStore();
+
+const onFormSubmit = async () => {
+  try {
+    await userStore.login(form.value);
+  } catch (error) {
+    console.log(error);
+  }
+};
 </script>
 
 <template>
@@ -56,7 +67,9 @@ const isPasswordVisible = ref(false)
 
         <VCardText>
           <h4 class="text-h4 mb-1">
-            Welcome to <span class="text-capitalize">{{ themeConfig.app.title }}</span>! 👋🏻
+            Welcome to
+            <span class="text-capitalize">{{ themeConfig.app.title }}</span
+            >! 👋🏻
           </h4>
           <p class="mb-0">
             Please sign-in to your account and start the adventure
@@ -64,7 +77,7 @@ const isPasswordVisible = ref(false)
         </VCardText>
 
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm @submit.prevent="onFormSubmit">
             <VRow>
               <!-- email -->
               <VCol cols="12">
@@ -84,16 +97,17 @@ const isPasswordVisible = ref(false)
                   label="Password"
                   placeholder="············"
                   :type="isPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :append-inner-icon="
+                    isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'
+                  "
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
 
                 <!-- remember me checkbox -->
-                <div class="d-flex align-center justify-space-between flex-wrap my-6">
-                  <VCheckbox
-                    v-model="form.remember"
-                    label="Remember me"
-                  />
+                <div
+                  class="d-flex align-center justify-space-between flex-wrap my-6"
+                >
+                  <VCheckbox v-model="form.remember" label="Remember me" />
 
                   <RouterLink
                     class="text-primary"
@@ -104,22 +118,12 @@ const isPasswordVisible = ref(false)
                 </div>
 
                 <!-- login button -->
-                <VBtn
-                  block
-                  type="submit"
-                >
-                  Login
-                </VBtn>
+                <VBtn block type="submit"> Login </VBtn>
               </VCol>
 
               <!-- create account -->
-              <VCol
-                cols="12"
-                class="text-body-1 text-center"
-              >
-                <span class="d-inline-block">
-                  New on our platform?
-                </span>
+              <VCol cols="12" class="text-body-1 text-center">
+                <span class="d-inline-block"> New on our platform? </span>
                 <RouterLink
                   class="text-primary ms-1 d-inline-block text-body-1"
                   :to="{ name: 'sign-up' }"
@@ -128,20 +132,14 @@ const isPasswordVisible = ref(false)
                 </RouterLink>
               </VCol>
 
-              <VCol
-                cols="12"
-                class="d-flex align-center"
-              >
+              <VCol cols="12" class="d-flex align-center">
                 <VDivider />
                 <span class="mx-4 text-high-emphasis">or</span>
                 <VDivider />
               </VCol>
 
               <!-- auth providers -->
-              <VCol
-                cols="12"
-                class="text-center"
-              >
+              <VCol cols="12" class="text-center">
                 <GoogleLoginButton />
               </VCol>
             </VRow>

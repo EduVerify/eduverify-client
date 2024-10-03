@@ -1,25 +1,44 @@
-<script setup >
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue';
-import authV1BottomShape from '@images/svg/auth-v1-bottom-shape.svg?raw';
-import authV1TopShape from '@images/svg/auth-v1-top-shape.svg?raw';
-import { VNodeRenderer } from '@layouts/components/VNodeRenderer';
-import { themeConfig } from '@themeConfig';
+<script setup lang="ts">
+import authV1BottomShape from "@images/svg/auth-v1-bottom-shape.svg?raw";
+import authV1TopShape from "@images/svg/auth-v1-top-shape.svg?raw";
+import { VNodeRenderer } from "@layouts/components/VNodeRenderer";
+import { themeConfig } from "@themeConfig";
+import { useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 
 definePage({
   meta: {
-    layout: 'blank',
+    layout: "blank",
     public: true,
   },
-})
+});
 
 const form = ref({
-  username: '',
-  email: '',
-  password: '',
+  first_name: "",
+  last_name: "",
+  email: "",
+  password: "",
+  phone: "",
+  confirmPassword: "",
   privacyPolicies: false,
-})
+});
+const isPasswordVisible = ref(false);
+const isConfirmPasswordVisible = ref(false);
 
-const isPasswordVisible = ref(false)
+const router = useRouter();
+
+const onFormSubmit = async () => {
+  const toast = useToast();
+
+  try {
+    await $api.post("/auth/register", form.value);
+    toast.success("Please confirm your email!");
+    router.push({ name: "verify-email", query: { email: form.value.email } });
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to sign up.");
+  }
+};
 </script>
 
 <template>
@@ -57,24 +76,30 @@ const isPasswordVisible = ref(false)
         </VCardItem>
 
         <VCardText>
-          <h4 class="text-h4 mb-1">
-            Adventure starts here 🚀
-          </h4>
-          <p class="mb-0">
-            Make your app management easy and fun!
-          </p>
+          <h4 class="text-h4 mb-1">Adventure starts here 🚀</h4>
+          <p class="mb-0">Make your app management easy and fun!</p>
         </VCardText>
 
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm @submit.prevent="onFormSubmit">
             <VRow>
               <!-- Username -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="form.username"
+                  v-model="form.first_name"
                   autofocus
-                  label="Username"
-                  placeholder="Johndoe"
+                  label="Fisrt Name"
+                  placeholder="John"
+                  :rules="[requiredValidator]"
+                />
+              </VCol>
+              <VCol cols="12">
+                <AppTextField
+                  v-model="form.last_name"
+                  autofocus
+                  label="Last Name"
+                  placeholder="doe"
+                  :rules="[requiredValidator]"
                 />
               </VCol>
               <!-- email -->
@@ -84,6 +109,17 @@ const isPasswordVisible = ref(false)
                   label="Email"
                   type="email"
                   placeholder="johndoe@email.com"
+                  :rules="[requiredValidator, emailValidator]"
+                />
+              </VCol>
+              <VCol cols="12">
+                <AppTextField
+                  v-model="form.phone"
+                  type="number"
+                  placeholder="+1 123 456 7890"
+                  persistent-placeholder
+                  :rules="[requiredValidator]"
+                  label="Phone"
                 />
               </VCol>
 
@@ -92,67 +128,58 @@ const isPasswordVisible = ref(false)
                 <AppTextField
                   v-model="form.password"
                   label="Password"
-                  placeholder="············"
                   :type="isPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :append-inner-icon="
+                    isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'
+                  "
+                  placeholder="Enter Password"
+                  :rules="[requiredValidator, passwordValidator]"
+                  autocomplete="on"
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
-
-                <div class="d-flex align-center my-6">
-                  <VCheckbox
-                    id="privacy-policy"
-                    v-model="form.privacyPolicies"
-                    inline
-                  />
-                  <VLabel
-                    for="privacy-policy"
-                    style="opacity: 1;"
-                  >
-                    <span class="me-1 text-high-emphasis">I agree to</span>
-                    <a
-                      href="javascript:void(0)"
-                      class="text-primary"
-                    >privacy policy & terms</a>
-                  </VLabel>
-                </div>
-
-                <VBtn
-                  block
-                  type="submit"
-                >
-                  Sign up
-                </VBtn>
               </VCol>
 
+              <!-- password -->
+              <VCol cols="12">
+                <AppTextField
+                  v-model="form.confirmPassword"
+                  label="Confirm Password"
+                  :type="isConfirmPasswordVisible ? 'text' : 'password'"
+                  placeholder="Confirm Password"
+                  :append-inner-icon="
+                    form.confirmPassword ? 'tabler-eye-off' : 'tabler-eye'
+                  "
+                  :rules="[
+                    requiredValidator,
+                    confirmedValidator(form.confirmPassword, form.password),
+                  ]"
+                  autocomplete="on"
+                  @click:append-inner="
+                    isConfirmPasswordVisible = !isConfirmPasswordVisible
+                  "
+                />
+              </VCol>
+
+              <VCol cols="12">
+                <VBtn block type="submit"> Sign up </VBtn>
+              </VCol>
               <!-- login instead -->
-              <VCol
-                cols="12"
-                class="text-center text-base"
-              >
+              <VCol cols="12" class="text-center text-base">
                 <span>Already have an account?</span>
-                <RouterLink
-                  class="text-primary ms-1"
-                  :to="{ name: 'login' }"
-                >
+                <RouterLink class="text-primary ms-1" :to="{ name: 'login' }">
                   Sign in instead
                 </RouterLink>
               </VCol>
 
-              <VCol
-                cols="12"
-                class="d-flex align-center"
-              >
+              <VCol cols="12" class="d-flex align-center">
                 <VDivider />
                 <span class="mx-4">or</span>
                 <VDivider />
               </VCol>
 
               <!-- auth providers -->
-              <VCol
-                cols="12"
-                class="text-center"
-              >
-                <AuthProvider />
+              <VCol cols="12" class="text-center">
+                <GoogleLoginButton />
               </VCol>
             </VRow>
           </VForm>

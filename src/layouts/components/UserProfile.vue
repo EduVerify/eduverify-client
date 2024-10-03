@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useUserStore } from "@/@core/stores/userStore";
-import avatar1 from "@images/avatars/avatar-1.png";
-import { onMounted, ref } from "vue";
 
 const useUser = useUserStore();
 
@@ -12,20 +10,12 @@ const handleLogout = () => {
   window.location.href = "/login";
 };
 
-const user = ref({
-  name: "",
-  role: "",
-  avatar: "",
-});
+const getUser = computed(() => useUser.userData);
+// onMounted(() => {
 
-onMounted(() => {
-  const getUser = computed(() => useUser.userData);
-  if (getUser.value) {
-    user.value.name = getUser.value.firstName + " " + getUser.value.lastName;
-    user.value.role = getUser.value.role;
-    user.value.avatar = getUser.value.picture;
-  }
-});
+//   if (getUser?.value) {
+
+//   }
 </script>
 <template>
   <VBadge
@@ -37,7 +27,10 @@ onMounted(() => {
     color="success"
   >
     <VAvatar class="cursor-pointer" color="primary" variant="tonal">
-      <VImg :src="user.avatar || avatar1" />
+      <VImg v-if="getUser?.picture" :src="getUser?.picture" />
+      <span v-else class="text-5xl font-weight-medium">
+        {{ avatarText(`${getUser?.first_name} ${getUser?.last_name}`) }}
+      </span>
 
       <!-- SECTION Menu -->
       <VMenu activator="parent" width="230" location="bottom end" offset="14px">
@@ -54,16 +47,23 @@ onMounted(() => {
                   color="success"
                 >
                   <VAvatar color="primary" variant="tonal">
-                    <VImg :src="user.avatar || avatar1" />
+                    <VImg v-if="getUser?.picture" :src="getUser?.picture" />
+                    <span v-else class="text-5xl font-weight-medium">
+                      {{
+                        avatarText(
+                          `${getUser?.first_name} ${getUser?.last_name}`
+                        )
+                      }}
+                    </span>
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              {{ user.name }}
+              {{ getUser?.first_name }} {{ getUser?.last_name }}
             </VListItemTitle>
-            <VListItemSubtitle>{{ user.role }}</VListItemSubtitle>
+            <VListItemSubtitle>{{ getUser?.role }}</VListItemSubtitle>
           </VListItem>
 
           <VDivider class="my-2" />

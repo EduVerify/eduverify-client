@@ -1,6 +1,6 @@
 import type { OffsetOptions } from '@floating-ui/dom'
-import type { RouteLocationRaw } from 'vue-router'
 import type { AppContentLayoutNav, ContentWidth, FooterType, HorizontalNavType, NavbarType } from '@layouts/enums'
+import type { RouteLocationRaw } from 'vue-router'
 
 export interface LayoutConfig {
   app: {
@@ -50,6 +50,16 @@ export interface AclProperties {
 // 👉 Vertical nav section title
 export interface NavSectionTitle extends Partial<AclProperties> {
   heading: string
+}
+export interface UserData {
+  taskDone?: any;
+  email: string
+  first_name: string
+  last_name: string
+  phone: string
+  picture: string
+  role: string
+  username:string
 }
 
 // 👉 Vertical nav link
