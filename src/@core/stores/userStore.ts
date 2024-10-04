@@ -91,6 +91,14 @@ export const useUserStore = defineStore('userStore', () => {
     }
   };
 
+  async function deleteUserData() {
+    try {
+      await $api.delete('/users/me');
+      removeAccessToken();
+      router.push({ name: 'login' });
+    } catch (error) {
+      console.error(error)}}
+
   return {
     userData,
     fetchUserData,
@@ -98,7 +106,8 @@ export const useUserStore = defineStore('userStore', () => {
     updateUserData,
     socialLogin,
     accessToken,
-    login
+    login,
+    deleteUserData
   };
 }, {
   persist: true

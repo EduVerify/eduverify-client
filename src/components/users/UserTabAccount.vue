@@ -61,7 +61,7 @@ const validateAccountDeactivation = [(v: string) => !!v || 'Please confirm accou
             class="mt-6"
             @click="isConfirmDialogOpen = true"
           >
-            Deactivate Account
+            Desactivate Account
           </VBtn>
         </VCardText>
       </VCard>
