@@ -10,7 +10,6 @@ const tabs = [
 const userData = ref(null);
 const { fetchUserData } = useUserStore();
 userData.value = await fetchUserData();
-console.log(userData.value);
 </script>
 
 <template>

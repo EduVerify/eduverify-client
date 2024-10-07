@@ -18,7 +18,6 @@ const resolveUserRoleVariant = (role: string) => {
 
 const userStore = useUserStore();
 const userData = computed(() => userStore.userData);
-console.log("userdata", userData.value);
 </script>
 
 <template>
