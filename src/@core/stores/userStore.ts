@@ -2,7 +2,8 @@ import { UserData } from "@/@layouts/types";
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-
+import { useToast } from "vue-toastification";
+const toast = useToast();
 export const useUserStore = defineStore(
   "userStore",
   () => {
@@ -67,8 +68,13 @@ export const useUserStore = defineStore(
         setAccessToken(data.access_token);
         setUser(data.user);
         router.push({ name: "root" });
+        // Toast success message
+        toast.success("Login successful!");
       } catch (error) {
         console.error(error);
+        //Toast error message
+        const err = error as { response?: { data?: { message?: string } } };
+        toast.error(err.response?.data?.message || "Login failed!");
       }
     }
 

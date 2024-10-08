@@ -3,8 +3,10 @@ import authV1BottomShape from "@images/svg/auth-v1-bottom-shape.svg?raw";
 import authV1TopShape from "@images/svg/auth-v1-top-shape.svg?raw";
 import { VNodeRenderer } from "@layouts/components/VNodeRenderer";
 import { themeConfig } from "@themeConfig";
+import { jwtDecode } from "jwt-decode";
 import { useToast } from "vue-toastification";
 const toast = useToast();
+const router = useRouter();
 definePage({
   meta: {
     layout: "blank",
@@ -13,17 +15,30 @@ definePage({
 });
 
 const form = ref({
-  email: "",
+  newPassword: "",
+  confirmPassword: "",
 });
 
+const isPasswordVisible = ref(false);
+const isConfirmPasswordVisible = ref(false);
+const queryParams = new URLSearchParams(window.location.search);
+const token = queryParams.get("token");
+let id: string | number;
+if (token) {
+  const decodedToken: { id?: number } = jwtDecode(token);
+  id = decodedToken.id || "";
+}
 const onSubmit = () => {
   $api
-    .post("/auth/forgot-password", form.value)
+    .put(`/auth/reset-password/${id}`, {
+      new_password: form.value.newPassword,
+    })
     .then(() => {
-      toast.success("Password reset link sent to your email");
+      toast.success("Password reset successfully");
+      router.push({ name: "login" });
     })
     .catch(() => {
-      toast.error("Please verify your email address");
+      toast.error("Password reset failed");
     });
 };
 </script>
@@ -43,11 +58,11 @@ const onSubmit = () => {
         class="text-primary auth-v1-bottom-shape d-none d-sm-block"
       />
 
-      <!-- 👉 Auth card -->
+      <!-- 👉 Auth Card -->
       <VCard
         class="auth-card"
         max-width="460"
-        :class="$vuetify.display.smAndUp ? 'pa-6' : 'pa-0'"
+        :class="$vuetify.display.smAndUp ? 'pa-6' : 'pa-2'"
       >
         <VCardItem class="justify-center">
           <VCardTitle>
@@ -63,30 +78,49 @@ const onSubmit = () => {
         </VCardItem>
 
         <VCardText>
-          <h4 class="text-h4 mb-1">Forgot Password? 🔒</h4>
+          <h4 class="text-h4 mb-1">Reset Password 🔒</h4>
           <p class="mb-0">
-            Enter your email and we'll send you instructions to reset your
-            password
+            Your new password must be different from previously used passwords
           </p>
         </VCardText>
 
         <VCardText>
           <VForm @submit.prevent="onSubmit">
             <VRow>
-              <!-- email -->
+              <!-- password -->
               <VCol cols="12">
                 <AppTextField
-                  v-model="form.email"
+                  v-model="form.newPassword"
                   autofocus
-                  label="Email"
-                  type="email"
-                  placeholder="johndoe@email.com"
+                  label="New Password"
+                  placeholder="············"
+                  :type="isPasswordVisible ? 'text' : 'password'"
+                  :append-inner-icon="
+                    isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'
+                  "
+                  @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                />
+              </VCol>
+
+              <!-- Confirm Password -->
+              <VCol cols="12">
+                <AppTextField
+                  v-model="form.confirmPassword"
+                  label="Confirm Password"
+                  placeholder="············"
+                  :type="isConfirmPasswordVisible ? 'text' : 'password'"
+                  :append-inner-icon="
+                    isConfirmPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'
+                  "
+                  @click:append-inner="
+                    isConfirmPasswordVisible = !isConfirmPasswordVisible
+                  "
                 />
               </VCol>
 
               <!-- reset password -->
               <VCol cols="12">
-                <VBtn block type="submit"> Send Reset Link </VBtn>
+                <VBtn block type="submit"> Set New Password </VBtn>
               </VCol>
 
               <!-- back to login -->

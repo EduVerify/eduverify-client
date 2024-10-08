@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useUserStore } from "@/@core/stores/userStore";
+import { useToast } from "vue-toastification";
+
 const isNewPasswordVisible = ref(false);
 const isConfirmPasswordVisible = ref(false);
-const isCurrentPasswordVisible = ref(false);
-const smsVerificationNumber = ref("+1(968) 819-2547");
-
+const toast = useToast();
 // Recent devices Headers
 const recentDeviceHeader = [
   { title: "BROWSER", key: "browser" },
@@ -47,12 +46,23 @@ const recentDevices = [
     activity: "13, July 2021 10:10",
   },
 ];
-const { userData } = useUserStore();
+const passData = ref({
+  newPassword: "",
+  confirmPassword: "",
+});
 const updatePassword = () => {
-  $api.put("/users/change-password", {
-    newPassword: "newPassword",
-    confirmPassword: "confirmPassword",
-  });
+  $api
+    .put("/users/me/password", {
+      new_password: passData.value.newPassword,
+    })
+    .then(() => {
+      passData.value.newPassword = "";
+      passData.value.confirmPassword = "";
+      toast.success("Password updated successfully!");
+    })
+    .catch(() => {
+      toast.error("Failed to update password.");
+    });
 };
 </script>
 
@@ -71,11 +81,11 @@ const updatePassword = () => {
             text="Minimum 8 characters long, uppercase & symbol"
           />
 
-          <VForm @submit.prevent="() => {}">
+          <VForm @submit.prevent="updatePassword">
             <VRow>
               <VCol cols="12" md="6">
                 <AppTextField
-                  v-if="userData?.isOauth === true"
+                  v-model="passData.newPassword"
                   label="New Password"
                   placeholder="············"
                   :type="isNewPasswordVisible ? 'text' : 'password'"
@@ -86,21 +96,10 @@ const updatePassword = () => {
                     isNewPasswordVisible = !isNewPasswordVisible
                   "
                 />
-                <AppTextField
-                  v-else
-                  label="Current Password"
-                  placeholder="············"
-                  :type="isCurrentPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="
-                    isCurrentPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'
-                  "
-                  @click:append-inner="
-                    isCurrentPasswordVisible = !isCurrentPasswordVisible
-                  "
-                />
               </VCol>
               <VCol cols="12" md="6">
                 <AppTextField
+                  v-model="passData.confirmPassword"
                   label="Confirm Password"
                   placeholder="············"
                   :type="isConfirmPasswordVisible ? 'text' : 'password'"
