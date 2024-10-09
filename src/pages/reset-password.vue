@@ -28,6 +28,7 @@ if (token) {
   const decodedToken: { id?: number } = jwtDecode(token);
   id = decodedToken.id || "";
 }
+
 const onSubmit = () => {
   $api
     .put(`/auth/reset-password/${id}`, {

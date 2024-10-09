@@ -20,13 +20,15 @@ const useUser = useUserStore();
 
 onMounted(() => {
   const queryParams = new URLSearchParams(window.location.search);
-  useUser.socialLogin(queryParams);
-});
 
-onMounted(() => {
-  // Check if accessToken is in localStorage
-
-  if (useUser.accessToken) {
+  if (queryParams.get("auth_status") === "reset-password") {
+    router.push({
+      name: "reset-password",
+      query: { token: queryParams.get("token") },
+    });
+  } else if (queryParams.get("oauth")) {
+    useUser.socialLogin(queryParams);
+  } else if (useUser.accessToken) {
     // Redirect to home page if token exists
     router.push({ name: "root" });
   } else {

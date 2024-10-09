@@ -5,6 +5,7 @@ import { VNodeRenderer } from "@layouts/components/VNodeRenderer";
 import { themeConfig } from "@themeConfig";
 import { useToast } from "vue-toastification";
 const toast = useToast();
+const router = useRouter();
 definePage({
   meta: {
     layout: "blank",
@@ -21,6 +22,8 @@ const onSubmit = () => {
     .post("/auth/forgot-password", form.value)
     .then(() => {
       toast.success("Password reset link sent to your email");
+      form.value.email = "";
+      router.push({ name: "login" });
     })
     .catch(() => {
       toast.error("Please verify your email address");

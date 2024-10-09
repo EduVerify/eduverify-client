@@ -107,7 +107,6 @@ export const useUserStore = defineStore(
         console.error(error);
       }
     }
-    console.log("userData", userData);
 
     return {
       userData,
