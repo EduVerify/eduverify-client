@@ -21,6 +21,8 @@ const form = ref({
   phone: "",
   confirmPassword: "",
   privacyPolicies: false,
+  university: { name: "" },
+  role: "STUDENT",
 });
 const isPasswordVisible = ref(false);
 const isConfirmPasswordVisible = ref(false);
@@ -157,6 +159,23 @@ const onFormSubmit = async () => {
                   @click:append-inner="
                     isConfirmPasswordVisible = !isConfirmPasswordVisible
                   "
+                />
+              </VCol>
+
+              <VCol cols="12">
+                <VRadioGroup inline class="mb-4" v-model="form.role">
+                  <VRadio value="STUDENT" label="Student" />
+                  <VRadio value="SCHOOL" label="University (Pro Account)" />
+                </VRadioGroup>
+              </VCol>
+
+              <VCol cols="12" v-show="form.role === 'SCHOOL'">
+                <AppTextField
+                  v-model="form.university.name"
+                  autofocus
+                  label="Univeristy name"
+                  placeholder="FS Agadir"
+                  :rules="[requiredValidator]"
                 />
               </VCol>
 
