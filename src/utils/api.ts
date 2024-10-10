@@ -32,7 +32,7 @@ $api.interceptors.response.use(
       setTimeout(() => {
         userStore.removeAccessToken(); // Assuming you have a method to clear storage
         window.location.href = "/login"; // Redirect to login page
-      }, 3000);
+      }, 2500);
     }
     return Promise.reject(error);
   }

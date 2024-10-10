@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from "@/@core/stores/userStore";
+import { authType } from "@/@layouts/enums";
 import { UserData } from "@/@layouts/types";
 import { useToast } from "vue-toastification";
 
@@ -21,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
     last_name: "",
     phone: "",
     picture: "",
-    role: "",
+    role: authType.STUDENT,
     username: "",
   }),
 });

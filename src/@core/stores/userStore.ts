@@ -1,3 +1,4 @@
+import { authType } from "@/@layouts/enums";
 import { UserData } from "@/@layouts/types";
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
@@ -23,7 +24,7 @@ export const useUserStore = defineStore(
         last_name: "",
         phone: "",
         picture: "",
-        role: "",
+        role: authType.STUDENT,
         username: "",
         isOauth: false,
       };
@@ -38,7 +39,7 @@ export const useUserStore = defineStore(
       const last_name = queryParams.get("last_name");
       const email = queryParams.get("email");
       const picture = queryParams?.get("picture");
-      const role = queryParams.get("role");
+      const role = (queryParams.get("role") as authType) || authType.STUDENT;
       const username = queryParams.get("username");
       const phone = queryParams.get("phone");
 

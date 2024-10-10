@@ -1,16 +1,20 @@
 <script lang="ts" setup>
-import { layoutConfig } from '@layouts'
-import { can } from '@layouts/plugins/casl'
-import { useLayoutConfigStore } from '@layouts/stores/config'
-import type { NavLink } from '@layouts/types'
-import { getComputedNavLinkToProp, getDynamicI18nProps, isNavLinkActive } from '@layouts/utils'
+import { layoutConfig } from "@layouts";
+import { can } from "@layouts/plugins/casl";
+import { useLayoutConfigStore } from "@layouts/stores/config";
+import type { NavLink } from "@layouts/types";
+import {
+  getComputedNavLinkToProp,
+  getDynamicI18nProps,
+  isNavLinkActive,
+} from "@layouts/utils";
 
 defineProps<{
-  item: NavLink
-}>()
+  item: NavLink;
+}>();
 
-const configStore = useLayoutConfigStore()
-const hideTitleAndBadge = configStore.isVerticalNavMini()
+const configStore = useLayoutConfigStore();
+const hideTitleAndBadge = configStore.isVerticalNavMini();
 </script>
 
 <template>
@@ -22,7 +26,12 @@ const hideTitleAndBadge = configStore.isVerticalNavMini()
     <Component
       :is="item.to ? 'RouterLink' : 'a'"
       v-bind="getComputedNavLinkToProp(item)"
-      :class="{ 'router-link-active router-link-exact-active': isNavLinkActive(item, $router) }"
+      :class="{
+        'router-link-active router-link-exact-active': isNavLinkActive(
+          item,
+          $router
+        ),
+      }"
     >
       <Component
         :is="layoutConfig.app.iconRenderer || 'div'"

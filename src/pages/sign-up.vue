@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { authType } from "@/@layouts/enums";
 import authV1BottomShape from "@images/svg/auth-v1-bottom-shape.svg?raw";
 import authV1TopShape from "@images/svg/auth-v1-top-shape.svg?raw";
 import { VNodeRenderer } from "@layouts/components/VNodeRenderer";
@@ -22,7 +23,7 @@ const form = ref({
   confirmPassword: "",
   privacyPolicies: false,
   university: { name: "" },
-  role: "STUDENT",
+  role: authType.STUDENT,
 });
 const isPasswordVisible = ref(false);
 const isConfirmPasswordVisible = ref(false);

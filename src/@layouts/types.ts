@@ -1,6 +1,7 @@
 import type { OffsetOptions } from "@floating-ui/dom";
 import type {
   AppContentLayoutNav,
+  authType,
   ContentWidth,
   FooterType,
   HorizontalNavType,
@@ -64,7 +65,7 @@ export interface UserData {
   last_name: string;
   phone: string;
   picture: string;
-  role: string;
+  role: authType;
   username: string;
   isOauth?: boolean;
 }
