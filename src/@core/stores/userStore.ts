@@ -99,6 +99,21 @@ export const useUserStore = defineStore(
       }
     }
 
+    async function switchRole(role: authType) {
+      try {
+        const { data } = await $api.put("/users/switch-role", { role });
+        if (userData.value) {
+          userData.value.role = role;
+        }
+
+        return data;
+        toast.success("Role switched successfully!");
+        router.push({ name: "root" });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     async function deleteUserData() {
       try {
         await $api.delete("/users/me");
@@ -118,6 +133,7 @@ export const useUserStore = defineStore(
       accessToken,
       login,
       deleteUserData,
+      switchRole,
     };
   },
   {

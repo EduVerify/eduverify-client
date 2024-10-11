@@ -42,8 +42,6 @@ const resolveNavItemComponent = (
   if ("heading" in item) return VerticalNavSectionTitle;
   if ("children" in item) return VerticalNavGroup;
 
-  console.log(item);
-
   return VerticalNavLink;
 };
 

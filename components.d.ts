@@ -73,6 +73,7 @@ declare module 'vue' {
     TimelineOutlined: typeof import('./src/components/TimelineOutlined.vue')['default']
     TiptapEditor: typeof import('./src/@core/components/TiptapEditor.vue')['default']
     TwoFactorAuthDialog: typeof import('./src/components/dialogs/TwoFactorAuthDialog.vue')['default']
+    UniversityDialog: typeof import('./src/components/dialogs/UniversityDialog.vue')['default']
     UserBioPanel: typeof import('./src/components/users/UserBioPanel.vue')['default']
     UserInfoEditDialog: typeof import('./src/components/dialogs/UserInfoEditDialog.vue')['default']
     UserInvoiceTable: typeof import('./src/components/users/UserInvoiceTable.vue')['default']

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useUserStore } from "@/@core/stores/userStore";
+import { authType } from "@/@layouts/enums";
 
 const useUser = useUserStore();
-
+const isUniversityDialogVisible = ref(false);
 const handleLogout = () => {
   useUser.removeAccessToken();
 
@@ -11,11 +12,15 @@ const handleLogout = () => {
 };
 
 const getUser = computed(() => useUser.userData);
-// onMounted(() => {
 
-//   if (getUser?.value) {
+const switchRole = async (role: authType) => {
+  const data = await useUser.switchRole(role);
+  console.log("switch", data);
 
-//   }
+  if (data === false) {
+    isUniversityDialogVisible.value = true;
+  }
+};
 </script>
 <template>
   <VBadge
@@ -98,10 +103,18 @@ const getUser = computed(() => useUser.userData);
           <!-- 👉 FAQ -->
           <VListItem link>
             <template #prepend>
-              <VIcon class="me-2" icon="tabler-help" size="22" />
+              <VIcon class="me-2" icon="tabler-switch-horizontal" size="22" />
             </template>
 
-            <VListItemTitle>FAQ</VListItemTitle>
+            <VListItemTitle
+              v-if="getUser?.role === authType.STUDENT"
+              @click="switchRole(authType.SCHOOL)"
+            >
+              Switch to Pro account</VListItemTitle
+            >
+            <VListItemTitle v-else @click="switchRole(authType.STUDENT)"
+              >Switch to student account</VListItemTitle
+            >
           </VListItem>
 
           <!-- Divider -->
@@ -120,4 +133,6 @@ const getUser = computed(() => useUser.userData);
       <!-- !SECTION -->
     </VAvatar>
   </VBadge>
+
+  <UniversityDialog v-model:isDialogVisible="isUniversityDialogVisible" />
 </template>

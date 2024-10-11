@@ -1,30 +1,34 @@
+import { computed } from 'vue';
 import { useUserStore } from "@/@core/stores/userStore"; // Adjust the import path as necessary
 import { authType } from "@/@layouts/enums";
 
-const userStore = useUserStore();
-const userData = userStore.userData;
+const { userData } = useUserStore();
 
-const navigationItems = [
-  {
-    title: "Dashboard",
-    to: { name: "root" },
-    icon: { icon: "tabler-smart-home" },
-  },
-];
-
-if (userData && userData.role === authType.STUDENT) {
-  navigationItems.push(
+const navigationItems = computed(() => {
+  const items = [
     {
-      title: "Posts",
-      to: { name: "posts-list" },
-      icon: { icon: "tabler-vocabulary" },
+      title: "Dashboard",
+      to: { name: "root" },
+      icon: { icon: "tabler-smart-home" },
     },
-    {
-      title: "Account",
-      to: { name: "users-me" },
-      icon: { icon: "tabler-user" },
-    }
-  );
-}
+  ];
+
+  if (userData && userData.role === authType.STUDENT) {
+    items.push(
+      {
+        title: "Posts",
+        to: { name: "posts-list" },
+        icon: { icon: "tabler-vocabulary" },
+      },
+      {
+        title: "Account",
+        to: { name: "users-me" },
+        icon: { icon: "tabler-user" },
+      }
+    );
+  }
+
+  return items;
+});
 
 export default navigationItems;
