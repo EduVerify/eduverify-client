@@ -101,10 +101,11 @@ export const useUserStore = defineStore(
 
     async function switchRole(role: authType) {
       try {
-        const { data } = await $api.put("/users/switch-role", { role });
+        const { data } = await $api.put("/auth/switch-role", { role });
         if (userData.value) {
           userData.value.role = role;
         }
+        setAccessToken(data.access_token);
 
         return data;
         toast.success("Role switched successfully!");

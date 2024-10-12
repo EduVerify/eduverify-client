@@ -4,6 +4,7 @@ import { authType } from "@/@layouts/enums";
 
 const useUser = useUserStore();
 const isUniversityDialogVisible = ref(false);
+
 const handleLogout = () => {
   useUser.removeAccessToken();
 
@@ -15,13 +16,11 @@ const getUser = computed(() => useUser.userData);
 
 const switchRole = async (role: authType) => {
   const data = await useUser.switchRole(role);
-  console.log("switch", data);
 
-  if (data === false) {
-    isUniversityDialogVisible.value = true;
-  }
+  if (data.isChecked === false) isUniversityDialogVisible.value = true;
 };
 </script>
+
 <template>
   <VBadge
     dot
@@ -110,11 +109,11 @@ const switchRole = async (role: authType) => {
               v-if="getUser?.role === authType.STUDENT"
               @click="switchRole(authType.SCHOOL)"
             >
-              Switch to Pro account</VListItemTitle
-            >
-            <VListItemTitle v-else @click="switchRole(authType.STUDENT)"
-              >Switch to student account</VListItemTitle
-            >
+              Switch to Pro account
+            </VListItemTitle>
+            <VListItemTitle v-else @click="switchRole(authType.STUDENT)">
+              Switch to student account
+            </VListItemTitle>
           </VListItem>
 
           <!-- Divider -->

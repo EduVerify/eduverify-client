@@ -10,8 +10,8 @@ interface Emit {
 }
 
 const props = withDefaults(defineProps<Props>(), {});
-const toast = useToast();
 const emit = defineEmits<Emit>();
+const toast = useToast();
 
 const onFormReset = () => {
   emit("update:isDialogVisible", false);
@@ -20,7 +20,9 @@ const onFormReset = () => {
 const dialogModelValueUpdate = (val: boolean) => {
   emit("update:isDialogVisible", val);
 };
-let file = ref<File | null>(null);
+
+const file = ref<File | null>(null);
+
 const universityData = ref({
   name: "",
   city: "",
@@ -37,17 +39,21 @@ onMounted(() => {
 });
 async function onFileChange(e: Event) {
   const target = e.target as HTMLInputElement;
+
   file.value = target.files?.[0] || null;
 
   if (file.value) {
     try {
       const formData = new FormData();
+
       formData.append("file", file.value);
+
       const { data } = await $api.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+
       localStorage.setItem("logo", data.file.path);
       toast.success("File uploaded successfully!");
     } catch (error) {
@@ -59,7 +65,10 @@ async function onFileChange(e: Event) {
 
 const onFormSubmit = async () => {
   try {
-    await $api.post("/universities", universityData.value);
+    const data = await $api.post("/universities", universityData.value);
+
+    console.log(data);
+
     emit("update:isDialogVisible", false);
     localStorage.removeItem("logo");
     toast.success("University information added successfully!");
@@ -154,7 +163,7 @@ const onFormSubmit = async () => {
 
             <!-- 👉 University Logo" -->
             <VCol cols="12" md="6">
-              <VFileInput @change="onFileChange" label="File input" />
+              <VFileInput label="File input" @change="onFileChange" />
             </VCol>
 
             <!-- 👉 Submit and Cancel -->
