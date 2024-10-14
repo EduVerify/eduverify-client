@@ -65,9 +65,12 @@ async function onFileChange(e: Event) {
 
 const onFormSubmit = async () => {
   try {
-    const data = await $api.post("/universities", universityData.value);
+    console.log(universityData.value);
 
-    console.log(data);
+    await $api.post("/universities", {
+      ...universityData.value,
+      logo: localStorage.getItem("logo"),
+    });
 
     emit("update:isDialogVisible", false);
     localStorage.removeItem("logo");

@@ -37,3 +37,8 @@ $api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export async function fetchUniversitites() {
+  const { data } = await $api.get("/universities");
+  return data;
+}

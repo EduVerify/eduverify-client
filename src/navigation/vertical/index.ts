@@ -1,6 +1,6 @@
-import { computed } from 'vue';
 import { useUserStore } from "@/@core/stores/userStore"; // Adjust the import path as necessary
 import { authType } from "@/@layouts/enums";
+import { computed } from "vue";
 
 const { userData } = useUserStore();
 
@@ -24,6 +24,11 @@ const navigationItems = computed(() => {
         title: "Account",
         to: { name: "users-me" },
         icon: { icon: "tabler-user" },
+      },
+      {
+        title: "Schools",
+        to: { name: "schools-list" },
+        icon: { icon: "tabler-school" },
       }
     );
   }
