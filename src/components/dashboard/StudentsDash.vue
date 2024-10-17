@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { useUserStore } from "@/@core/stores/userStore";
 import data from "@/views/data/tableData";
 import customCheck from "@images/svg/Check.svg";
 import customLaptop from "@images/svg/laptop.svg";
 import customLightbulb from "@images/svg/lightbulb.svg";
 
 const dataList = ref(data);
+const useStore = useUserStore();
+const userData = computed(() => useStore.userData);
 </script>
 
 <template>
@@ -17,10 +20,11 @@ const dataList = ref(data);
       >
         <div class="pe-3">
           <h5 class="text-h5 mb-2">
-            Welcome back,<span class="text-h4"> Felecia 👋🏻 </span>
+            Welcome,
+            <span class="text-h4"> {{ userData?.first_name }} 👋🏻 </span>
           </h5>
 
-          <div class="text-wrap text-body-1" style="max-inline-size: 360px;">
+          <div class="text-wrap text-body-1" style="max-inline-size: 360px">
             Your progress this week is Awesome. let's keep it up and get a lot
             of points reward!
           </div>

@@ -4,7 +4,7 @@ import { breakpointsVuetifyV3 } from "@vueuse/core";
 import { VIcon } from "vuetify/components/VIcon";
 
 // ❗ Logo SVG must be imported with ?raw suffix
-import logo from "@images/logo.svg?raw";
+import logo from "@images/logo.png";
 
 import {
   AppContentLayoutNav,
@@ -17,7 +17,7 @@ export const { themeConfig, layoutConfig } = defineThemeConfig({
   app: {
     title: "eduverify",
     logo: h("div", {
-      innerHTML: logo,
+      innerHTML: `<img src="${logo}" alt="logo" width="40" height="50" />`,
       style: "line-height:0; color: rgb(var(--v-global-theme-primary))",
     }),
     contentWidth: ContentWidth.Boxed,
