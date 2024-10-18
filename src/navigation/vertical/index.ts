@@ -33,6 +33,14 @@ const navigationItems = computed(() => {
     );
   }
 
+  if (userData && userData.role === authType.SCHOOL) {
+    items.push({
+      title: "Posts",
+      to: { name: "posts-my-posts" },
+      icon: { icon: "tabler-vocabulary" },
+    });
+  }
+
   return items;
 });
 

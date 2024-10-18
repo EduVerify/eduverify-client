@@ -24,7 +24,7 @@ const userData = computed(() => useStore.userData);
             <span class="text-h4"> {{ userData?.first_name }} 👋🏻 </span>
           </h5>
 
-          <div class="text-wrap text-body-1" style="max-inline-size: 360px">
+          <div class="text-wrap text-body-1" style="max-inline-size: 360px;">
             Your progress this week is Awesome. let's keep it up and get a lot
             of points reward!
           </div>
